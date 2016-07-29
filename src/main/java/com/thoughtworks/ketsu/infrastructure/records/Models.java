@@ -1,17 +1,21 @@
 package com.thoughtworks.ketsu.infrastructure.records;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Injector;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.thoughtworks.ketsu.Dao.OrderDao;
 import com.thoughtworks.ketsu.Dao.ProductDao;
 import com.thoughtworks.ketsu.Dao.UserDao;
 import com.thoughtworks.ketsu.domain.products.ProductRepository;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepositoryImpl;
 import com.thoughtworks.ketsu.infrastructure.repositories.UserRepositoryImpl;
+import com.thoughtworks.ketsu.util.SafeInjector;
 import org.jongo.Jongo;
 
 import java.net.UnknownHostException;
@@ -72,6 +76,8 @@ public class Models extends AbstractModule {
         bind(ProductMapper.class).to(ProductDao.class);
         bind(UserRepository.class).to(UserRepositoryImpl.class);
         bind(UserMapper.class).to(UserDao.class);
+        bind(OrderMapper.class).to(OrderDao.class);
+        requestStaticInjection(SafeInjector.class);
     }
 
     protected final ClassLoader getResourceClassLoader() {

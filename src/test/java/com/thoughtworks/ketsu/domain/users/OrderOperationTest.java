@@ -33,9 +33,10 @@ public class OrderOperationTest {
     @Test
     public void should_save_and_get_order() {
         Order save = user.placeOrder(orderJsonForTest(product.getId()));
-        Optional<Order> fetched = user.findOrderById("orderId");
+        Optional<Order> fetched = user.findOrderById(save.id);
 
         assertThat(fetched.isPresent(), is(true));
+        assertThat(fetched.get().getId(), is(save.id));
 
     }
 }

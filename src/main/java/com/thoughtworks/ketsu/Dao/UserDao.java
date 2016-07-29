@@ -1,7 +1,9 @@
 package com.thoughtworks.ketsu.Dao;
 
+import com.google.inject.Injector;
 import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
+import com.thoughtworks.ketsu.util.SafeInjector;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
@@ -21,11 +23,12 @@ public class UserDao implements UserMapper {
     @Override
     public User save(Map<String, Object> info) {
         userCollection.insert(info);
-        return userCollection.findOne().as(User.class);
+        return SafeInjector.injectMembers(userCollection.findOne().as(User.class));
     }
 
     @Override
     public User findById(String userId) {
-        return userCollection.findOne(new ObjectId(userId)).as(User.class);
+        User user = userCollection.findOne(new ObjectId(userId)).as(User.class);
+        return SafeInjector.injectMembers(user);
     }
 }
