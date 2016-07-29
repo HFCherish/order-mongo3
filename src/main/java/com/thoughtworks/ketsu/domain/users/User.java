@@ -22,8 +22,6 @@ public class User implements Record{
     @Inject
     OrderMapper orderMapper;
 
-    @Inject
-    Jongo jongo;
 
     public String getId() {
         return id;
