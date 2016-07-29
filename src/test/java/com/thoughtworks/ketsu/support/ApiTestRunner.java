@@ -3,6 +3,7 @@ package com.thoughtworks.ketsu.support;
 import com.google.inject.AbstractModule;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import org.jongo.Jongo;
 import org.junit.rules.TestRule;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class ApiTestRunner extends InjectBasedRunner {
 
-//    @Inject
-//    DB db;
+    @Inject
+    Jongo jongo;
 
     public ApiTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -27,9 +28,9 @@ public class ApiTestRunner extends InjectBasedRunner {
             try {
                 base.evaluate();
             } finally {
-//                    db.getCollection("products").remove(new BasicDBObject());
-//                    db.getCollection("users").remove(new BasicDBObject());
-//                    db.getCollection("orders").remove(new BasicDBObject());
+                    jongo.getCollection("products").remove();
+                    jongo.getCollection("users").remove();
+                    jongo.getCollection("orders").remove();
             }
         }
     };

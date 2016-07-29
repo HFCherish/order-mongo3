@@ -6,6 +6,9 @@ import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 import org.bson.types.ObjectId;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class AppUtils {
 
   public static DBObject toDBObject(Object pojo) {
@@ -23,4 +26,5 @@ public class AppUtils {
 
     return new Gson().fromJson(json, clazz);
   }
+
 }

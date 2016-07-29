@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.thoughtworks.ketsu.support.TestHelper.productJsonForTest;
@@ -24,5 +25,15 @@ public class ProductRepositoryTest {
 
         assertThat(fetched.isPresent(), is(true));
         assertThat(fetched.get().id, is(save.id));
+    }
+
+    @Test
+    public void should_get_all() {
+        Product save = productRepository.save(productJsonForTest());
+        List<Product> all = productRepository.findAll();
+
+        assertThat(all.size(), is(1));
+        assertThat(all.get(0).id, is(save.id));
+
     }
 }
