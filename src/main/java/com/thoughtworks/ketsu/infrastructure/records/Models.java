@@ -16,6 +16,7 @@ import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepositoryImpl;
 import com.thoughtworks.ketsu.infrastructure.repositories.UserRepositoryImpl;
 import com.thoughtworks.ketsu.util.SafeInjector;
+import com.thoughtworks.ketsu.web.validators.OrderValidator;
 import org.jongo.Jongo;
 
 import java.net.UnknownHostException;
@@ -78,6 +79,7 @@ public class Models extends AbstractModule {
         bind(UserMapper.class).to(UserDao.class);
         bind(OrderMapper.class).to(OrderDao.class);
         requestStaticInjection(SafeInjector.class);
+        bind(OrderValidator.class);
     }
 
     protected final ClassLoader getResourceClassLoader() {

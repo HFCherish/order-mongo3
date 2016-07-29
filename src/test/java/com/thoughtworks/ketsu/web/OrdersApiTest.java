@@ -6,6 +6,7 @@ import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @RunWith(ApiTestRunner.class)
-public class OrdersApiTest extends ApiSupport{
+public class OrdersApiTest extends ApiSupport {
     @Inject
     UserRepository userRepository;
     @Inject
@@ -60,6 +61,15 @@ public class OrdersApiTest extends ApiSupport{
         Response response = post(orderBaseUrl, info);
 
         assertThat(response.getStatus(), is(400));
-
     }
+
+    @Test
+    public void should_400_when_create_given_incomplete_order_item_info() {
+        Map<String, Object> info = orderJsonForTest(new ObjectId().toString());
+
+        Response response = post(orderBaseUrl, info);
+
+        assertThat(response.getStatus(), is(400));
+    }
+
 }
