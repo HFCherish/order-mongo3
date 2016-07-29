@@ -4,6 +4,7 @@ import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
 import com.thoughtworks.ketsu.support.ApiTestRunner;
+import org.bson.types.ObjectId;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -56,5 +57,13 @@ public class UsersApiTest extends ApiSupport{
         assertThat(fetchedInfo.get("uri").toString(), containsString(userBaseUrl + "/" + save.getId()));
         assertThat(fetchedInfo.get("_id"), is(save.getId()));
         assertThat(fetchedInfo.get("name"), is(info.get("name")));
+    }
+
+    @Test
+    public void should_404_when_not_exist() {
+        Response response = get(userBaseUrl + "/" + new ObjectId());
+
+        assertThat(response.getStatus(), is(404));
+
     }
 }
