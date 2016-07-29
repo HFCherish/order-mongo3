@@ -37,6 +37,5 @@ public class OrderOperationTest {
 
         assertThat(fetched.isPresent(), is(true));
         assertThat(fetched.get().getId(), is(save.id));
-
     }
 }
