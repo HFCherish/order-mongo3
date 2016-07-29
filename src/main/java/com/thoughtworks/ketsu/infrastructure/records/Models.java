@@ -6,8 +6,10 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.thoughtworks.ketsu.Dao.ProductDao;
 import com.thoughtworks.ketsu.domain.products.ProductRepository;
+import com.thoughtworks.ketsu.domain.users.UserRepositry;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepositoryImpl;
+import com.thoughtworks.ketsu.infrastructure.repositories.UserRepositoryImpl;
 import org.jongo.Jongo;
 
 import java.net.UnknownHostException;
@@ -66,6 +68,7 @@ public class Models extends AbstractModule {
         bind(Jongo.class).toInstance(jongo);
         bind(ProductRepository.class).to(ProductRepositoryImpl.class);
         bind(ProductMapper.class).to(ProductDao.class);
+        bind(UserRepositry.class).to(UserRepositoryImpl.class);
     }
 
     protected final ClassLoader getResourceClassLoader() {
