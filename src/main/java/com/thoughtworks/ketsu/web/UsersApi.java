@@ -3,10 +3,7 @@ package com.thoughtworks.ketsu.web;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,4 +29,13 @@ public class UsersApi {
         }
         return Response.created(routes.userUrl(userRepository.save(info).getId())).build();
     }
+
+    @Path("{id}")
+    public UserApi getUser(@PathParam("id") String id) {
+        return userRepository.findById(id)
+                .map(UserApi::new)
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
+    }
+
+
 }
