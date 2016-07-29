@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ApiTestRunner extends InjectBasedRunner {
 
-    @Inject
-    DB db;
+//    @Inject
+//    DB db;
 
     public ApiTestRunner(Class<?> klass) throws InitializationError {
         super(klass);
@@ -27,9 +27,9 @@ public class ApiTestRunner extends InjectBasedRunner {
             try {
                 base.evaluate();
             } finally {
-                    db.getCollection("products").remove(new BasicDBObject());
-                    db.getCollection("users").remove(new BasicDBObject());
-                    db.getCollection("orders").remove(new BasicDBObject());
+//                    db.getCollection("products").remove(new BasicDBObject());
+//                    db.getCollection("users").remove(new BasicDBObject());
+//                    db.getCollection("orders").remove(new BasicDBObject());
             }
         }
     };

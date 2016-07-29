@@ -15,8 +15,8 @@ import static java.util.Arrays.asList;
 
 public class DatabaseTestRunner extends InjectBasedRunner {
 
-    @Inject
-    DB db;
+//    @Inject
+//    DB db;
 
     public DatabaseTestRunner(final Class<?> clazz) throws InitializationError {
         super(clazz);
@@ -37,9 +37,9 @@ public class DatabaseTestRunner extends InjectBasedRunner {
             try {
                 base.evaluate();
             } finally {
-                db.getCollection("products").remove(new BasicDBObject());
-                db.getCollection("users").remove(new BasicDBObject());
-                db.getCollection("orders").remove(new BasicDBObject());
+//                db.getCollection("products").remove(new BasicDBObject());
+//                db.getCollection("users").remove(new BasicDBObject());
+//                db.getCollection("orders").remove(new BasicDBObject());
             }
         }
     };

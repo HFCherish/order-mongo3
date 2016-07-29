@@ -30,9 +30,6 @@ public class Api extends ResourceConfig {
                 host,
                 dbname
         );
-//        String redistHost = System.getenv().getOrDefault("REDIS_HOST", "127.0.0.1");
-//        String redisPort = System.getenv().getOrDefault("REDIS_PORT", "6379");
-//        final String redisURL = String.format("%s:%s", redistHost, redisPort);
 
         properties.setProperty("db.url", connectURL);
 
@@ -48,8 +45,6 @@ public class Api extends ResourceConfig {
         register(RoutesFeature.class);
         register(LoggingFilter.class);
         register(CORSResponseFilter.class);
-//        register(OpenSessionInViewRequestFilter.class);
-//        register(OpenSessionInViewResponseFilter.class);
     }
 
     private void bridge(ServiceLocator serviceLocator, Injector injector) {
