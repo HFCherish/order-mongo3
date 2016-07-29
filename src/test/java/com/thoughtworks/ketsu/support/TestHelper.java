@@ -13,4 +13,10 @@ public class TestHelper {
         }};
     }
 
+    public static Map<String, Object> userJsonForTest() {
+        return new HashMap(){{
+            put("name", "Petrina");
+        }};
+    }
+
 }
