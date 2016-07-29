@@ -4,7 +4,9 @@ import com.google.inject.AbstractModule;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.thoughtworks.ketsu.Dao.ProductDao;
 import com.thoughtworks.ketsu.domain.products.ProductRepository;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.ProductMapper;
 import com.thoughtworks.ketsu.infrastructure.repositories.ProductRepositoryImpl;
 import org.jongo.Jongo;
 
@@ -63,6 +65,7 @@ public class Models extends AbstractModule {
         Jongo jongo = new Jongo(db);
         bind(Jongo.class).toInstance(jongo);
         bind(ProductRepository.class).to(ProductRepositoryImpl.class);
+        bind(ProductMapper.class).to(ProductDao.class);
     }
 
     protected final ClassLoader getResourceClassLoader() {
