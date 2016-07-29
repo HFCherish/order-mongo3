@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 
 import javax.ws.rs.core.Response;
 
+import static com.thoughtworks.ketsu.support.TestHelper.INVALID_USER_NAME;
+import static com.thoughtworks.ketsu.support.TestHelper.USER_NAME;
 import static com.thoughtworks.ketsu.support.TestHelper.userJsonForTest;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -18,9 +20,17 @@ public class UsersApiTest extends ApiSupport{
 
     @Test
     public void should_register() {
-        Response response = post(userBaseUrl, userJsonForTest());
+        Response response = post(userBaseUrl, userJsonForTest(USER_NAME));
 
         assertThat(response.getStatus(), is(201));
 
     }
+
+    @Test
+    public void should_400_when_register_given_invalid_name() {
+        Response response = post(userBaseUrl, userJsonForTest(INVALID_USER_NAME));
+
+        assertThat(response.getStatus(), is(400));
+    }
+
 }
