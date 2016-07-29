@@ -21,9 +21,10 @@ public class UserRepositryTest {
     @Test
     public void should_save_and_get_user() {
         User save = userRepositry.save(userJsonForTest(USER_NAME));
-        Optional<User> fetched = userRepositry.findById("userId");
+        Optional<User> fetched = userRepositry.findById(save.id);
 
         assertThat(fetched.isPresent(), is(true));
+        assertThat(fetched.get().id, is(save.id));
 
     }
 }
