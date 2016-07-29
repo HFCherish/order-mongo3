@@ -10,4 +10,8 @@ public class Product {
     protected String name;
     protected String description;
     protected double price;
+
+    public String getId() {
+        return id;
+    }
 }
