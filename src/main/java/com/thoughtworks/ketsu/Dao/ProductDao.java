@@ -8,8 +8,6 @@ import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

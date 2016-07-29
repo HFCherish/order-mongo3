@@ -17,7 +17,7 @@
 	3. --------------------------------------------------
 	2. should have tried to search from database and should able to get a least one product if database is not empty and that one product's _id are the same as expected (mapper-findAll) --4 :: 4
 	3. --------------------------------------------------
-	2. should the response body contains at least  one item info and contains right uri, name, description, price info (resource.get, record) --2 :: 2
+	2. should the response body contains at least  one item info and contains right uri, name,id, description, price info (resource.get, record) --2 :: 2
 11. user register
 	11. should return 201 when register a new user (resource.post) --4 :: 4
 	12. should return 400 when the registered name is null or not composed of letters and numbers, at least one (resource.post) -- 4 :: 4

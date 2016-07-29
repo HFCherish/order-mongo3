@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.productJsonForTest;
@@ -55,6 +56,10 @@ public class ProductApiTest extends ApiSupport{
 
         assertThat(response.getStatus(), is(200));
         Map fetchedInfo = response.readEntity(Map.class);
+        verifyProductInfo(info, save, fetchedInfo);
+    }
+
+    private void verifyProductInfo(Map<String, Object> info, Product save, Map fetchedInfo) {
         assertThat(fetchedInfo.get("_id"), is(save.getId()));
         assertThat(fetchedInfo.get("uri").toString(), containsString(productBaseUrl + "/" + save.getId()));
         assertThat(fetchedInfo.get("name"), is(info.get("name")));
@@ -78,6 +83,8 @@ public class ProductApiTest extends ApiSupport{
         Response response = get(productBaseUrl);
 
         assertThat(response.getStatus(), is(200));
-
+        List<Map> list = response.readEntity(List.class);
+        assertThat(list.size(), is(1));
+        verifyProductInfo(info, save, list.get(0));
     }
 }
