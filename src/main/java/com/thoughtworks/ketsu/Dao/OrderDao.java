@@ -27,7 +27,7 @@ public class OrderDao implements OrderMapper {
     public Order save(Map<String, Object> info, String userId) {
         info.put("user_id", userId);
         for(Map item: (List<Map>)info.get("order_items")) {
-            item.put("amount", productDao.findById(item.get("product_id").toString()).getPrice());
+            item.put("amount", productDao.getPriceOf(item.get("product_id").toString()));
         }
         orderCollection.save(info);
         return SafeInjector.injectMembers(orderCollection.findOne().as(Order.class));

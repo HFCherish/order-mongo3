@@ -8,12 +8,14 @@ public class TestHelper {
 
     public static final String USER_NAME = "Petrina";
     public static final String INVALID_USER_NAME = "Petrin';L'a";
+    public static final int ITEM_QUANTITY = 2;
+    public static final double PROD_PRICE = 12.1;
 
     public static Map<String, Object> productJsonForTest() {
         return new HashMap(){{
             put("name", "Imran");
             put("description", "teacher");
-            put("price", 12.1);
+            put("price", PROD_PRICE);
         }};
     }
 
@@ -30,7 +32,7 @@ public class TestHelper {
             put("phone", "689780");
             put("order_items", Arrays.asList(new HashMap(){{
                 put("product_id", prodId);
-                put("quantity", 2);
+                put("quantity", ITEM_QUANTITY);
             }}));
         }};
     }

@@ -1,6 +1,5 @@
 package com.thoughtworks.ketsu.Dao;
 
-import com.google.inject.Injector;
 import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
 import com.thoughtworks.ketsu.util.SafeInjector;

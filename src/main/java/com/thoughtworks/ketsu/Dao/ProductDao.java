@@ -8,6 +8,7 @@ import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +36,9 @@ public class ProductDao implements ProductMapper {
     @Override
     public List<Product> findAll() {
         return FluentIterable.from(prodCollection.find().as(Product.class)).toList();
+    }
+
+    protected double getPriceOf(String product_id) {
+        return (double)prodCollection.findOne(new ObjectId(product_id)).projection("{price:1, _id:0}").as(HashMap.class).get("price");
     }
 }

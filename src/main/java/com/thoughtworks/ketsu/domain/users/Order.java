@@ -33,7 +33,8 @@ public class Order implements Record{
             put("name", name);
             put("address", address);
             put("phone", phone);
-            put("created_at", getCreatedAt().toString());
+            put("total_price", calTotalPrice());
+            put("created_at", new ObjectId(id).getDate().toString());
         }};
     }
 
@@ -44,7 +45,12 @@ public class Order implements Record{
         return map;
     }
 
-    public Date getCreatedAt() {
-        return new ObjectId(id).getDate();
+    private double calTotalPrice() {
+        double total = 0;
+        for( OrderItem orderItem: orderItems) {
+            total += orderItem.amount * orderItem.quantity;
+        }
+        return total;
     }
+
 }
