@@ -1,14 +1,14 @@
 package com.thoughtworks.ketsu.infrastructure.repositories;
 
 import com.thoughtworks.ketsu.domain.users.User;
-import com.thoughtworks.ketsu.domain.users.UserRepositry;
+import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.UserMapper;
 
 import javax.inject.Inject;
 import java.util.Map;
 import java.util.Optional;
 
-public class UserRepositoryImpl implements UserRepositry {
+public class UserRepositoryImpl implements UserRepository {
     @Inject
     UserMapper userMapper;
 

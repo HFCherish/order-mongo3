@@ -14,14 +14,14 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 @RunWith(DatabaseTestRunner.class)
-public class UserRepositryTest {
+public class UserRepositoryTest {
     @Inject
-    UserRepositry userRepositry;
+    UserRepository userRepository;
 
     @Test
     public void should_save_and_get_user() {
-        User save = userRepositry.save(userJsonForTest(USER_NAME));
-        Optional<User> fetched = userRepositry.findById(save.id);
+        User save = userRepository.save(userJsonForTest(USER_NAME));
+        Optional<User> fetched = userRepository.findById(save.id);
 
         assertThat(fetched.isPresent(), is(true));
         assertThat(fetched.get().id, is(save.id));
