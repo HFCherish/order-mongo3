@@ -20,6 +20,10 @@ public class Product implements Record{
         return id;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return new HashMap() {{

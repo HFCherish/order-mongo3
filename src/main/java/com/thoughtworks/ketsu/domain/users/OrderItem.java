@@ -11,12 +11,15 @@ public class OrderItem implements Record {
     @JsonProperty("product_id")
     String prodId;
     int quantity;
+    double amount;
 
     @Override
     public Map<String, Object> toRefJson(Routes routes) {
         return new HashMap() {{
+            put("uri", routes.productUrl(prodId));
             put("product_id", prodId);
             put("quantity", quantity);
+            put("amount", amount);
         }};
     }
 

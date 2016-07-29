@@ -28,7 +28,8 @@ public class ProductDao implements ProductMapper {
 
     @Override
     public Product findById(String prodId) {
-        return prodCollection.findOne(new ObjectId(prodId)).as(Product.class);
+        Product as = prodCollection.findOne(new ObjectId(prodId)).as(Product.class);
+        return as;
     }
 
     @Override

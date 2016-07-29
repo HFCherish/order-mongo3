@@ -29,16 +29,19 @@ public class OrdersApiTest extends ApiSupport {
     UserRepository userRepository;
     @Inject
     ProductRepository productRepository;
+
     private User user;
     private Product product;
     private String orderBaseUrl;
+    private Map<String, Object> prodInfo;
 
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
         user = userRepository.save(userJsonForTest(USER_NAME));
-        product = productRepository.save(productJsonForTest());
+        prodInfo = productJsonForTest();
+        product = productRepository.save(prodInfo);
         orderBaseUrl = "/users/" + user.getId() + "/orders";
     }
 
@@ -76,7 +79,7 @@ public class OrdersApiTest extends ApiSupport {
 
     @Test
     public void should_get_some_order() {
-        Map<String, Object> info = orderJsonForTest(new ObjectId().toString());
+        Map<String, Object> info = orderJsonForTest(product.getId());
         Order save = user.placeOrder(info);
 
         Response response = get(orderBaseUrl + "/" + save.getId());
@@ -92,8 +95,10 @@ public class OrdersApiTest extends ApiSupport {
         List<Map> order_items = (List<Map>) fetchedInfo.get("order_items");
         assertThat(order_items.size(), is(1));
         Map savedItem = (Map) order_items.get(0);
+        assertThat(order_items.get(0).get("uri").toString(), containsString("/products/" + savedItem.get("product_id")));
         assertThat(order_items.get(0).get("product_id"), is(savedItem.get("product_id")));
         assertThat(order_items.get(0).get("quantity"), is(savedItem.get("quantity")));
+        assertThat(order_items.get(0).get("amount"), is(product.getPrice()));
 
     }
 }
