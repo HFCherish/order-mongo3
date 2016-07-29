@@ -1,5 +1,6 @@
 package com.thoughtworks.ketsu.support;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,18 @@ public class TestHelper {
     public static Map<String, Object> userJsonForTest(String name) {
         return new HashMap(){{
             put("name", name);
+        }};
+    }
+
+    public static Map<String, Object> orderJsonForTest(String prodId) {
+        return new HashMap(){{
+            put("name", "Petrina");
+            put("address", "beijing");
+            put("phone", "689780");
+            put("order_items", Arrays.asList(new HashMap(){{
+                put("product_id", prodId);
+                put("quantity", 2);
+            }}));
         }};
     }
 
