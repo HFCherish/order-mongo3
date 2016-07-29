@@ -1,8 +1,10 @@
 package com.thoughtworks.ketsu.domain.users;
 
+import com.google.inject.Injector;
 import com.thoughtworks.ketsu.infrastructure.mongo.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
+import org.jongo.Jongo;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
@@ -19,6 +21,9 @@ public class User implements Record{
 
     @Inject
     OrderMapper orderMapper;
+
+    @Inject
+    Jongo jongo;
 
     public String getId() {
         return id;

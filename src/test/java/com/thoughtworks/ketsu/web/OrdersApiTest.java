@@ -2,6 +2,7 @@ package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.products.Product;
 import com.thoughtworks.ketsu.domain.products.ProductRepository;
+import com.thoughtworks.ketsu.domain.users.Order;
 import com.thoughtworks.ketsu.domain.users.User;
 import com.thoughtworks.ketsu.domain.users.UserRepository;
 import com.thoughtworks.ketsu.support.ApiSupport;
@@ -72,4 +73,14 @@ public class OrdersApiTest extends ApiSupport {
         assertThat(response.getStatus(), is(400));
     }
 
+    @Test
+    public void should_get_some_order() {
+        Map<String, Object> info = orderJsonForTest(new ObjectId().toString());
+        Order save = user.placeOrder(info);
+
+        Response response = get(orderBaseUrl + "/" + save.getId());
+
+        assertThat(response.getStatus(), is(200));
+
+    }
 }
