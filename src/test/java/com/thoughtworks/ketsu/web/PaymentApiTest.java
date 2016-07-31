@@ -43,6 +43,23 @@ public class PaymentApiTest extends ApiSupport {
         Response response = post(paymentBaseUrl, paymentJsonForTest());
 
         assertThat(response.getStatus(), is(201));
+    }
+
+    @Test
+    public void should_400_when_pay_given_incomplete_input() {
+
+        Map<String, Object> info = paymentJsonForTest();
+        //type empty
+        info.remove("pay_type");
+
+        Response response = post(paymentBaseUrl, info);
+
+        assertThat(response.getStatus(), is(400));
+    }
+
+    @Test
+    public void should_get_payment() {
+
 
     }
 }
