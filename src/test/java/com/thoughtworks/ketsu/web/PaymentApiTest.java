@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.Map;
 
 import static com.thoughtworks.ketsu.support.TestHelper.*;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -29,12 +30,13 @@ public class PaymentApiTest extends ApiSupport {
 
     private String paymentBaseUrl;
     private Order order;
+    private User user;
 
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        User user = userRepository.save(userJsonForTest(USER_NAME));
+        user = userRepository.save(userJsonForTest(USER_NAME));
         order = user.placeOrder(orderJsonForTest(productRepository.save(productJsonForTest()).getId()));
         paymentBaseUrl = "/users/" + user.getId() + "/orders/" + order.getId() + "/payment";
     }
@@ -60,11 +62,17 @@ public class PaymentApiTest extends ApiSupport {
 
     @Test
     public void should_get_payment() {
-        Payment pay = order.pay(paymentJsonForTest());
+        Map<String, Object> payInfo = paymentJsonForTest();
+        order.pay(payInfo);
 
         Response response = get(paymentBaseUrl);
 
         assertThat(response.getStatus(), is(200));
+        Map info = response.readEntity(Map.class);
+        assertThat(info.get("order_uri").toString(), containsString("/users/" + user.getId() + "/orders/" + order.getId()));
+        assertThat(info.get("uri").toString(), containsString(paymentBaseUrl));
+        assertThat(info.get("amount"), is(payInfo.get("amount")));
+        assertThat(info.get("pay_type"), is(payInfo.get("pay_type")));
 
     }
 }
