@@ -1,16 +1,24 @@
 package com.thoughtworks.ketsu.domain.users;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.thoughtworks.ketsu.infrastructure.mongo.mappers.OrderMapper;
 import com.thoughtworks.ketsu.infrastructure.records.Record;
 import com.thoughtworks.ketsu.web.jersey.Routes;
 import org.bson.types.ObjectId;
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
 
-import java.util.*;
+import javax.inject.Inject;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Order implements Record{
+    @Inject
+    OrderMapper orderMapper;
+
     @MongoId
     @MongoObjectId
     String id;
@@ -54,10 +62,10 @@ public class Order implements Record{
     }
 
     public Payment pay(Map<String, Object> info) {
-        return null;
+        return orderMapper.pay(info, id);
     }
 
     public Optional<Payment> getPayment() {
-        return Optional.ofNullable(new Payment());
+        return Optional.ofNullable(orderMapper.findPayment(id));
     }
 }
