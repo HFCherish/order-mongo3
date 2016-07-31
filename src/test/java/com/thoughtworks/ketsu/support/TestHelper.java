@@ -12,25 +12,32 @@ public class TestHelper {
     public static final double PROD_PRICE = 12.1;
 
     public static Map<String, Object> productJsonForTest() {
-        return new HashMap(){{
+        return new HashMap() {{
             put("name", "Imran");
             put("description", "teacher");
             put("price", PROD_PRICE);
         }};
     }
 
+    public static Map<String, Object> paymentJsonForTest() {
+        return new HashMap() {{
+            put("pay_type", "CASH");
+            put("amount", 2.2);
+        }};
+    }
+
     public static Map<String, Object> userJsonForTest(String name) {
-        return new HashMap(){{
+        return new HashMap() {{
             put("name", name);
         }};
     }
 
     public static Map<String, Object> orderJsonForTest(String prodId) {
-        return new HashMap(){{
+        return new HashMap() {{
             put("name", "Petrina");
             put("address", "beijing");
             put("phone", "689780");
-            put("order_items", Arrays.asList(new HashMap(){{
+            put("order_items", Arrays.asList(new HashMap() {{
                 put("product_id", prodId);
                 put("quantity", ITEM_QUANTITY);
             }}));
