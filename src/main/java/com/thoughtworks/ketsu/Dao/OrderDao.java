@@ -6,8 +6,10 @@ import com.thoughtworks.ketsu.util.SafeInjector;
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
+import org.jongo.MongoCursor;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,5 +38,15 @@ public class OrderDao implements OrderMapper {
     @Override
     public Order findById(String orderId) {
         return SafeInjector.injectMembers(orderCollection.findOne(new ObjectId(orderId)).as(Order.class));
+    }
+
+    @Override
+    public List<Order> findAllOf(String userId) {
+        MongoCursor<Order> mongoCursor = orderCollection.find("{user_id:#}", userId).as(Order.class);
+        List<Order> orders = new ArrayList<>();
+        while (mongoCursor.hasNext()) {
+            orders.add(SafeInjector.injectMembers(mongoCursor.next()));
+        }
+        return orders;
     }
 }

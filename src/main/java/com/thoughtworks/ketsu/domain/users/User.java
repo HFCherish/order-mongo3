@@ -8,6 +8,7 @@ import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,5 +46,9 @@ public class User implements Record{
 
     public Optional<Order> findOrderById(String orderId) {
         return Optional.ofNullable(orderMapper.findById(orderId));
+    }
+
+    public List<Order> findAllOrders() {
+        return orderMapper.findAllOf(id);
     }
 }
