@@ -1,11 +1,10 @@
 package com.thoughtworks.ketsu.web;
 
 import com.thoughtworks.ketsu.domain.users.Order;
+import com.thoughtworks.ketsu.domain.users.Payment;
 import com.thoughtworks.ketsu.web.validators.NullFieldValidator;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
@@ -30,5 +29,12 @@ public class PaymentApi {
         new NullFieldValidator().validate(Arrays.asList("pay_type", "amount"),info);
         order.pay(info);
         return Response.created(URI.create("")).build();
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Payment getPay() {
+        return order.getPayment()
+                .orElseThrow(() -> new WebApplicationException(Response.Status.NOT_FOUND));
     }
 }

@@ -24,10 +24,11 @@ public class ProductApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response create(Map<String, Object> info,
                            @Context Routes routes) {
-        Map<String, List> nullFields = new NullFieldValidator().getNullFieldsMap(Arrays.asList("name", "description", "price"), info);
-        if(nullFields != null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
-        }
+//        Map<String, List> nullFields = new NullFieldValidator().getNullFieldsMap(Arrays.asList("name", "description", "price"), info);
+//        if(nullFields != null) {
+//            return Response.status(Response.Status.BAD_REQUEST).entity(nullFields).build();
+//        }
+        new NullFieldValidator().validate(Arrays.asList("name", "description", "price"), info);
         return Response.created(routes.productUrl(productRepository.save(info).getId())).build();
     }
 
