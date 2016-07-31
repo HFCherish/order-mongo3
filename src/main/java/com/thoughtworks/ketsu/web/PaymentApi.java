@@ -21,6 +21,7 @@ public class PaymentApi {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response pay(Map<String, Object> info) {
+        order.pay(info);
         return Response.created(URI.create("")).build();
     }
 }

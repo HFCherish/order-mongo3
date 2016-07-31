@@ -53,4 +53,11 @@ public class Order implements Record{
         return total;
     }
 
+    public Payment pay(Map<String, Object> info) {
+        return null;
+    }
+
+    public Optional<Payment> getPayment() {
+        return Optional.ofNullable(new Payment());
+    }
 }
